@@ -1,0 +1,55 @@
+<form (ngSubmit)="form.valid && onSubmit()" #form="ngForm" novalidate>
+    <div>
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" [(ngModel)]="model.firstName" #firstNameRef="ngModel" required minlength="3" maxlength="15">
+       </div>
+       <div *ngIf="form.submitted && firstNameRef.invalid">
+        <span *ngIf="firstNameRef.errors?.['required']">The first name is required</span> 
+        <span *ngIf="firstNameRef.errors?.['minlength']">The first name minimal length is {{firstNameRef.errors?.['minlength']?.requiredLength}} characters</span> 
+        <span *ngIf="firstNameRef.errors?.['maxlength']">The first name must be less than {{firstNameRef.errors?.['maxlength']?.requiredLength}} characters</span> 
+       </div>
+       <div>
+<br/>
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" [(ngModel)]="model.lastName" #lastNameRef="ngModel" required minlength="3" maxlength="15">
+   </div>
+   <div *ngIf="form.submitted && lastNameRef.errors">
+    <span *ngIf="lastNameRef.errors?.['required']">The last name is required</span> 
+    <span *ngIf="lastNameRef.errors?.['minlength']">The last name must consit at least {{lastNameRef.errors?.['minlength']?.requiredLength}} characters</span> 
+    <span *ngIf="lastNameRef.errors?.['maxlength']">The last name must be less than {{lastNameRef.errors?.['maxlength']?.requiredLength}} characters</span> 
+   </div>
+    <div>
+<br/>
+        <label for="email">Enter your email</label>
+        <input type="email" name="email" [(ngModel)]="model.email" #emailRef="ngModel" required email>
+    </div>
+    <div *ngIf="form.submitted && emailRef.errors">
+        <span *ngIf="emailRef.errors?.['required']">
+            The email is required
+        </span>
+        <span *ngIf="emailRef.errors?.['email']">
+            The email is not valid
+        </span>
+    </div>
+    <br/>
+        <div>
+            <label for="password">Enter your password</label> 
+            <input type="password" name="password" [(ngModel)]="model.password" required minlength="6" #passwordRef="ngModel">
+        </div>
+        <div *ngIf="form.submitted && passwordRef.errors">
+            <span *ngIf="passwordRef.errors?.['required']">The password is required</span>
+            <span *ngIf="passwordRef.errors?.['minlength']">
+                The password must be at least 6 characters
+            </span>
+        </div>
+        <button type="submit">Sign up</button>
+      
+        <!-- 
+        <button type="submit" [disabled]="!form.valid">Sign up</button>
+  -->
+    </form>
+
+    <div *ngIf="form.submitted">
+{{model.firstName}}
+
+</div>
